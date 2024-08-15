@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import RestaurantCard from "./RestaurantCard";
 import ShimmerContainer from "./ShimmerContainer";
-import { SEARCH_LOGO } from "../utils/constants";
+import { SEARCH_LOGO, SWIGGY_URL } from "../utils/constants";
 import { Link } from "react-router-dom";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 const Body = () => {
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
@@ -18,9 +19,7 @@ const Body = () => {
   }, []);
 
   const fetchData = async () => {
-    const data = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=18.6599512&lng=73.8264634&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
-    );
+    const data = await fetch(SWIGGY_URL);
     const json = await data.json();
 
     setListOfRestaurants(
@@ -30,6 +29,16 @@ const Body = () => {
       json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
   };
+
+  const onlineStatus = useOnlineStatus();
+
+  if (onlineStatus === false) {
+    return (
+      <h2>
+        Looks like your internet connection is lost! Please try again later
+      </h2>
+    );
+  }
 
   return listOfRestaurants.length === 0 ? (
     <ShimmerContainer />
@@ -56,7 +65,6 @@ const Body = () => {
           <img className="search-logo" src={SEARCH_LOGO}></img>
         </span>
       </div>
-
       <div className="filter">
         <h3>Restaurants with online food delivery</h3>
         <button
@@ -136,7 +144,6 @@ const Body = () => {
         <div className="restaurants-grid">
           {filteredRestaurants.map((restaurant) => (
             <Link to={"/restaurantmenu/" + restaurant.info.id}>
-              {console.log(restaurant)}
               <RestaurantCard key={restaurant.info.id} resData={restaurant} />
             </Link>
           ))}

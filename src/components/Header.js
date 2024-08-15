@@ -9,10 +9,6 @@ import {
 import { Link } from "react-router-dom";
 
 const Header = () => {
-  useEffect(() => {
-    console.log("useEffect rendered");
-  });
-
   return (
     <div className="header">
       <div className="header-container">

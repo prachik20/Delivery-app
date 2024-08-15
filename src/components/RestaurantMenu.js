@@ -1,29 +1,16 @@
 import { useEffect, useState } from "react";
-
 import { REST_URL, RATING_STAR, CYCLE_ICON } from "../utils/constants";
 import Shimmer from "./Shimmer";
 import Accordion from "./Accordion";
 import { useParams } from "react-router-dom";
+import useRestaurantMenu from "../utils/useRestaurantMenu";
 
 const RestaurantMenu = () => {
-  const [menu, setMenu] = useState(null);
-
   const { id } = useParams();
-  console.log(id);
-  useEffect(() => {
-    fetchData();
-  }, []);
 
-  const fetchData = async () => {
-    const data = await fetch(REST_URL + id);
-    console.log(data);
-    const json = await data.json();
+  const restMenu = useRestaurantMenu(id);
 
-    setMenu(json.data);
-    console.log(json);
-  };
-
-  if (menu === null) {
+  if (restMenu === null) {
     return <Shimmer />;
   }
   const {
@@ -34,15 +21,9 @@ const RestaurantMenu = () => {
     cuisines,
     areaName,
     sla,
-  } = menu?.cards[2].card?.card?.info;
+  } = restMenu?.cards[2].card?.card?.info;
 
-  // const { itemCards, title } =
-  //   menu?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card;
-
-  const { cards } = menu?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR;
-
-  const { categories } =
-    menu?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[3]?.card?.card;
+  const { cards } = restMenu?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR;
 
   return (
     <div className="rest-menu">
@@ -71,54 +52,16 @@ const RestaurantMenu = () => {
       <div className="menu">MENU</div>
 
       <div className="menu-container">
-        {/* <Accordion
-          title={title}
-          content={itemCards.map((item) => (
-            <li>{item.card.info.name}</li>
-          ))}
-        /> */}
-        {/* <div>
-          <h2>
-            {
-              menu?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[3]?.card
-                ?.card.title
-            }
-          </h2>
-        </div> */}
-        {/* {categories.map((item) => (
-          <>
-            <Accordion
-              title={item.title}
-              content={item.itemCards.map((item) => (
-                <li>{item.card.info.name}</li>
-              ))}
-            />
-          </>
-        ))} */}
-        {/* 
         {cards.map((card) => {
-          if (card.card.card.categories) {
-            const cartCard = card.card.card.categories;
-            return cartCard.map((item) => (
-              <Accordion
-                heading={card.card.title}
-                title={item.title}
-                content={item.itemCards.map((data) => (
-                  <li>{data.card.info.name}</li>
-                ))}
-              />
-            ));
-          }
-        })} */}
-
-        {cards.map((card) => {
-          if (card.card.card.categories) {
+          const categories = card?.card?.card?.categories;
+          const itemCards = card.card.card.itemCards;
+          if (categories) {
             return (
               <>
                 <div className="menu-separator"></div>
                 <div className="menu-accordion">{card.card.card.title}</div>
                 <div>
-                  {card.card.card.categories.map((item) => (
+                  {categories.map((item) => (
                     <Accordion
                       title={item.title}
                       content={item.itemCards.map((data) => (
@@ -130,9 +73,7 @@ const RestaurantMenu = () => {
               </>
             );
           }
-          if (card.card.card.itemCards) {
-            const itemCards = card.card.card.itemCards;
-            // console.log(itemCards);
+          if (itemCards) {
             return (
               <>
                 <div className="menu-separator"></div>
@@ -143,7 +84,7 @@ const RestaurantMenu = () => {
                         {card.card.card.title}
                       </div>
                     }
-                    content={card.card.card.itemCards.map((item) => (
+                    content={itemCards.map((item) => (
                       <li>{item.card.info.name}</li>
                     ))}
                   />
