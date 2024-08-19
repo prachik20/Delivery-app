@@ -44,17 +44,17 @@ const Body = () => {
     <ShimmerContainer />
   ) : (
     <div className="body">
-      <div className="search">
+      <div className="flex justify-between items-center mx-auto my-6 border border-solid black w-80 h-10">
         <input
           type="text"
-          className="search-box"
+          className="p-2 focus:outline-none h-8"
           value={searchText}
           onChange={(e) => {
             setSearchText(e.target.value);
           }}
         ></input>
         <span
-          className="search-btn"
+          className="flex pr-2"
           onClick={() => {
             const filteredList = listOfRestaurants.filter((res) =>
               res.info.name.toLowerCase().includes(searchText.toLowerCase())
@@ -62,13 +62,18 @@ const Body = () => {
             setFilteredRestaurants(filteredList);
           }}
         >
-          <img className="search-logo" src={SEARCH_LOGO}></img>
+          <img
+            className="justify-between w-6 ml-4 hover:cursor-pointer "
+            src={SEARCH_LOGO}
+          ></img>
         </span>
       </div>
-      <div className="filter">
-        <h3>Restaurants with online food delivery</h3>
+      <h3 className="mx-52 my-10 text-xl font-bold">
+        Restaurants with online food delivery
+      </h3>
+      <div className="flex mx-52 ">
         <button
-          className="filter-btn"
+          className=" mr-5 border border-solid black p-2 rounded-xl"
           onClick={() => {
             if (toggleBtn) {
               setFilteredRestaurants(
@@ -86,7 +91,7 @@ const Body = () => {
           Fast Delivery
         </button>
         <button
-          className="filter-btn"
+          className="mr-5 border border-solid black p-2 rounded-xl"
           onClick={() => {
             if (toggleBtn) {
               setFilteredRestaurants(
@@ -102,7 +107,7 @@ const Body = () => {
           Top Rated Restaurants
         </button>
         <button
-          className="filter-btn"
+          className="mr-5 border border-solid black p-2 rounded-xl"
           onClick={() => {
             if (toggleBtn) {
               setFilteredRestaurants(
@@ -120,7 +125,7 @@ const Body = () => {
           Less than RS.300
         </button>
         <button
-          className="filter-btn"
+          className="mr-5 border border-solid black p-2 rounded-xl"
           onClick={() => {
             if (toggleBtn) {
               setFilteredRestaurants(
@@ -140,8 +145,8 @@ const Body = () => {
           RS.300-Rs. 600
         </button>
       </div>
-      <div className="res-container">
-        <div className="restaurants-grid">
+      <div className="m-20 mx-52">
+        <div className="flex flex-wrap gap-8">
           {filteredRestaurants.map((restaurant) => (
             <Link to={"/restaurantmenu/" + restaurant.info.id}>
               <RestaurantCard key={restaurant.info.id} resData={restaurant} />

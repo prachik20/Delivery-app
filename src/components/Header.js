@@ -10,44 +10,44 @@ import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
-    <div className="header">
-      <div className="header-container">
-        <div className="logo-container">
+    <div className="">
+      <div className="flex justify-between border border-solid black">
+        <div className="">
           <Link to="/home">
-            <img className="logo" src={LOGO_URL} />
+            <img className="w-44 ml-12" src={LOGO_URL} />
           </Link>
         </div>
-        <div className="nav-container">
-          <ul>
-            <li>
+        <div className="flex items-center">
+          <ul className="flex ">
+            <li className="pr-16">
               <Link to="/about">
-                <div className="nav-item">
-                  <img className="about-icon" src={ABOUT_LOGO}></img>
-                  <span className="nav-item-name">About us</span>
+                <div className="flex ">
+                  <img className="w-6" src={ABOUT_LOGO}></img>
+                  <span className="pl-3">About us</span>
                 </div>
               </Link>
             </li>
-            <li>
+            <li className="pr-16">
               <Link to="/contact">
-                <div className="nav-item">
-                  <img className="contact-icon" src={CONTACT_LOGO}></img>
-                  <span className="nav-item-name">Contact</span>
+                <div className="flex">
+                  <img className="w-6" src={CONTACT_LOGO}></img>
+                  <span className="pl-3">Contact</span>
                 </div>
               </Link>
             </li>
-            <li>
+            <li className="pr-16">
               <Link to="/cart">
-                <div className="nav-item">
-                  <img className="login-icon" src={LOGIN_ICON}></img>
-                  <span className="nav-item-name">Login</span>
+                <div className="flex">
+                  <img className="w-6" src={LOGIN_ICON}></img>
+                  <span className="pl-3">Login</span>
                 </div>
               </Link>
             </li>
-            <li>
+            <li className="pr-24">
               <Link to="/cart">
-                <div className="nav-item">
-                  <img className="cart-icon" src={CART_ICON}></img>
-                  <span className="nav-item-name">Cart</span>{" "}
+                <div className="flex">
+                  <img className="w-6" src={CART_ICON}></img>
+                  <span className="pl-3">Cart</span>{" "}
                 </div>
               </Link>
             </li>
