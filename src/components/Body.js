@@ -18,6 +18,7 @@ const Body = () => {
     fetchData();
   }, []);
 
+  console.log(listOfRestaurants);
   const fetchData = async () => {
     const data = await fetch(SWIGGY_URL);
     const json = await data.json();

@@ -1,12 +1,15 @@
-import { useEffect, useState } from "react";
-import { REST_URL, RATING_STAR, CYCLE_ICON } from "../utils/constants";
+import { RATING_STAR, CYCLE_ICON } from "../utils/constants";
 import Shimmer from "./Shimmer";
-import Accordion from "./Accordion";
 import { useParams } from "react-router-dom";
 import useRestaurantMenu from "../utils/useRestaurantMenu";
+import RestaurantCategory from "./RestaurantCategory";
+import NestCategory from "./NestCategory";
+import { useState } from "react";
 
 const RestaurantMenu = () => {
   const { id } = useParams();
+
+  const [showIndex, setShowIndex] = useState(0);
 
   const restMenu = useRestaurantMenu(id);
 
@@ -23,76 +26,65 @@ const RestaurantMenu = () => {
     sla,
   } = restMenu?.cards[2].card?.card?.info;
 
-  const { cards } = restMenu?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR;
+  // const { cards } = restMenu?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR;
+
+  const categories =
+    restMenu?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR.cards.filter(
+      (c) =>
+        c.card?.card?.["@type"] ===
+        "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
+    );
+
+  const nestedCategories =
+    restMenu?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR.cards.filter(
+      (c) =>
+        c.card?.card?.["@type"] ===
+        "type.googleapis.com/swiggy.presentation.food.v2.NestedItemCategory"
+    );
 
   return (
-    <div className="rest-menu">
-      <div className="rest-name">{name}</div>
-      <div className="rest-subtext">
-        <div className="rest-cost">
-          <img className="rest-star" src={RATING_STAR}></img>
-          <span className="rest-rating">
+    <div className="max-w-[700] max-h-[800] mx-auto">
+      <div className="my-8 font-bold text-2xl">{name}</div>
+      <div className="my-6 border border-gray-300 rounded-2xl">
+        <div className="font-semibold mt-4 mx-3 flex items-center">
+          <img className="h-4 w-4" src={RATING_STAR}></img>
+          <span className="pl-2">
             {" "}
             {avgRating}
             {" (" + totalRatingsString + ") "}
-            <span className="circle-separator">•</span>
+            <span className="px-1">•</span>
             {costForTwoMessage}
           </span>
         </div>
-        <div className="rest-cuisines">{cuisines.join(", ")}</div>
-        <div className="rest-address">
-          Outlet <span className="rest-areaname">{areaName}</span>
+        <div className="text-sm mx-5 my-1 text-[#FF5200]">
+          {cuisines.join(", ")}
         </div>
-        <hr className="line-separator"></hr>
-        <div className="del-time">
-          <img className="cycle-icon" src={CYCLE_ICON}></img>
+        <div className="mx-5 my-1 text-sm">
+          Outlet <span className="ml-2 text-sm text-gray-500">{areaName}</span>
+        </div>
+        <hr className="mt-4"></hr>
+        <div className="flex items-center text-sm">
+          <img className="h-6 w-6 m-3 " src={CYCLE_ICON}></img>
           {sla.slaString}
         </div>
       </div>
-      <div className="menu">MENU</div>
+      <div className="text-center m-4 font-semibold">MENU</div>
 
       <div className="menu-container">
-        {cards.map((card) => {
-          const categories = card?.card?.card?.categories;
-          const itemCards = card.card.card.itemCards;
-          if (categories) {
-            return (
-              <>
-                <div className="menu-separator"></div>
-                <div className="menu-accordion">{card.card.card.title}</div>
-                <div>
-                  {categories.map((item) => (
-                    <Accordion
-                      title={item.title}
-                      content={item.itemCards.map((data) => (
-                        <li>{data.card.info.name}</li>
-                      ))}
-                    />
-                  ))}
-                </div>
-              </>
-            );
-          }
-          if (itemCards) {
-            return (
-              <>
-                <div className="menu-separator"></div>
-                <div>
-                  <Accordion
-                    title={
-                      <div className="title-accordion">
-                        {card.card.card.title}
-                      </div>
-                    }
-                    content={itemCards.map((item) => (
-                      <li>{item.card.info.name}</li>
-                    ))}
-                  />
-                </div>
-              </>
-            );
-          }
-        })}
+        {categories.map((item, index) => (
+          <RestaurantCategory
+            data={item?.card?.card}
+            showItems={index === showIndex && true}
+            setShowIndex={() => setShowIndex(index)}
+          />
+        ))}
+        {nestedCategories.map((item, index) => (
+          <NestCategory
+            nestCat={item?.card?.card}
+            showItems={index === showIndex && true}
+            setShowIndex={() => setShowIndex(index)}
+          />
+        ))}
       </div>
     </div>
   );

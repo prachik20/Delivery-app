@@ -12,7 +12,7 @@ const RestaurantCard = (props) => {
         />
       </div>
       <div className="mx-2 my-4">
-        <div className="text-lg font-bold">{name}</div>
+        <div className="text-lg font-bold break-words truncate">{name}</div>
         <div className="flex items-center">
           <img className="w-4 h-4 " src={RATING_STAR}></img>
           <span className="mx-2">{avgRating} •</span>
@@ -25,5 +25,20 @@ const RestaurantCard = (props) => {
     </div>
   );
 };
+
+// export const withPromotedLabel = (RestaurantCard) => {
+//   return (props) => {
+//     return (
+//       <>
+//         <label className="absolute text-white p-2 m-2 hover:sticky">
+//           {props.resData.info.aggregatedDiscountInfoV3.header +
+//             " " +
+//             props.resData.info.aggregatedDiscountInfoV3.subHeader}
+//         </label>
+//         <RestaurantCard {...props} />
+//       </>
+//     );
+//   };
+// };
 
 export default RestaurantCard;
