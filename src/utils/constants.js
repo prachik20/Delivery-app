@@ -5,10 +5,10 @@ export const CDN_URL =
   "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/";
 
 export const SWIGGY_URL =
-  "https://www.swiggy.com/dapi/restaurants/list/v5?lat=18.6599512&lng=73.8264634&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING";
+  "https://corsproxy.io/?https://www.swiggy.com/dapi/restaurants/list/v5?lat=18.6599512&lng=73.8264634&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING";
 
 export const REST_URL =
-  "https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=18.6599512&lng=73.8264634&restaurantId=";
+  "https://corsproxy.io/?https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=18.6599512&lng=73.8264634&restaurantId=";
 
 export const SEARCH_LOGO =
   "https://cdn3.iconfinder.com/data/icons/feather-5/24/search-512.png";
@@ -36,3 +36,6 @@ export const DOWN_ARROW =
 
 export const UP_ARROW =
   "https://cdn-icons-png.flaticon.com/128/3838/3838683.png";
+
+export const EMPTY_CART =
+  "https://cdn-icons-png.flaticon.com/512/11329/11329060.png";

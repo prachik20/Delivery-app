@@ -8,15 +8,19 @@ import Cart from "./components/Cart";
 import Error from "./components/Error";
 import Login from "./components/Login";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
-
+import { Provider } from "react-redux";
 import RestaurantMenu from "./components/RestaurantMenu";
+import appStore from "./utils/appStore";
+import ItemsList from "./components/ItemsList";
 
 const App = () => {
   return (
-    <div className="app">
-      <Header />
-      <Outlet />
-    </div>
+    <Provider store={appStore}>
+      <div className="app">
+        <Header />
+        <Outlet />
+      </div>
+    </Provider>
   );
 };
 

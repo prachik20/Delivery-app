@@ -16,6 +16,12 @@ const useRestaurantMenu = (id) => {
     setRestMenu(json.data);
   };
 
+  const restInfo = restMenu?.cards.filter(
+    (res) =>
+      res?.card?.card?.["@type"] ==
+      "type.googleapis.com/swiggy.presentation.food.v2.Restaurant"
+  );
+
   return restMenu;
 };
 

@@ -1,7 +1,7 @@
 import { UP_ARROW, DOWN_ARROW } from "../utils/constants";
 import ItemsList from "./ItemsList";
 
-const NestCategory = ({ nestCat, showItems, setShowIndex }) => {
+const NestCategory = ({ nestCat, showItems, setShowIndex, restDetails }) => {
   const handleClick = () => {
     setShowIndex();
   };
@@ -17,6 +17,7 @@ const NestCategory = ({ nestCat, showItems, setShowIndex }) => {
               onClick={handleClick}
             >
               <span>{item.title}</span>
+
               <span>
                 {showItems ? (
                   <img className="w-5 h-5" src={UP_ARROW}></img>
@@ -25,7 +26,9 @@ const NestCategory = ({ nestCat, showItems, setShowIndex }) => {
                 )}
               </span>
             </div>
-            {showItems && <ItemsList items={item.itemCards} />}
+            {showItems && (
+              <ItemsList items={item.itemCards} restDetails={restDetails} />
+            )}
           </>
         ))}
       </div>

@@ -1,11 +1,11 @@
-import { useState } from "react";
 import { DOWN_ARROW, UP_ARROW } from "../utils/constants";
 import ItemsList from "./ItemsList";
 
-const RestaurantCategory = ({ data, showItems, setShowIndex }) => {
+const RestaurantCategory = ({ data, showItems, setShowIndex, restDetails }) => {
   const handleClick = () => {
     setShowIndex();
   };
+
   return (
     <div>
       <div className="h-2 w-[700] bg-gray-200"></div>
@@ -14,6 +14,7 @@ const RestaurantCategory = ({ data, showItems, setShowIndex }) => {
           <span className="">
             {data.title} ({data.itemCards.length})
           </span>
+
           <span>
             {showItems ? (
               <img className="w-5 h-5" src={UP_ARROW}></img>
@@ -22,7 +23,11 @@ const RestaurantCategory = ({ data, showItems, setShowIndex }) => {
             )}
           </span>
         </div>
-        <div>{showItems && <ItemsList items={data.itemCards} />}</div>
+        <div>
+          {showItems && (
+            <ItemsList items={data.itemCards} restDetails={restDetails} />
+          )}
+        </div>
       </div>
     </div>
   );

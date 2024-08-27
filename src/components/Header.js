@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import {
   LOGO_URL,
   CART_ICON,
@@ -7,8 +6,12 @@ import {
   ABOUT_LOGO,
 } from "../utils/constants";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Header = () => {
+  //Subscribing to the store using Selector
+  const cartItems = useSelector((store) => store.cart.items);
+
   return (
     <div className="">
       <div className="flex justify-between border border-solid black">
@@ -36,7 +39,7 @@ const Header = () => {
               </Link>
             </li>
             <li className="pr-16">
-              <Link to="/cart">
+              <Link to="/login">
                 <div className="flex">
                   <img className="w-6" src={LOGIN_ICON}></img>
                   <span className="pl-3">Login</span>
@@ -47,7 +50,7 @@ const Header = () => {
               <Link to="/cart">
                 <div className="flex">
                   <img className="w-6" src={CART_ICON}></img>
-                  <span className="pl-3">Cart</span>{" "}
+                  <span className="pl-3">Cart ({cartItems.length})</span>{" "}
                 </div>
               </Link>
             </li>

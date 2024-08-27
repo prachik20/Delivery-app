@@ -26,8 +26,6 @@ const RestaurantMenu = () => {
     sla,
   } = restMenu?.cards[2].card?.card?.info;
 
-  // const { cards } = restMenu?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR;
-
   const categories =
     restMenu?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR.cards.filter(
       (c) =>
@@ -76,6 +74,7 @@ const RestaurantMenu = () => {
             data={item?.card?.card}
             showItems={index === showIndex && true}
             setShowIndex={() => setShowIndex(index)}
+            restDetails={restMenu?.cards[2].card?.card?.info}
           />
         ))}
         {nestedCategories.map((item, index) => (
