@@ -48,13 +48,14 @@ const Body = () => {
       <div className="flex justify-between items-center mx-auto my-6 border border-solid black w-80 h-10">
         <input
           type="text"
+          data-testid="searchInput"
           className="p-2 focus:outline-none h-8"
           value={searchText}
           onChange={(e) => {
             setSearchText(e.target.value);
           }}
         ></input>
-        <span
+        <button
           className="flex pr-2"
           onClick={() => {
             const filteredList = listOfRestaurants.filter((res) =>
@@ -62,12 +63,13 @@ const Body = () => {
             );
             setFilteredRestaurants(filteredList);
           }}
+          data-testid="searchBtn"
         >
           <img
             className="justify-between w-6 ml-4 hover:cursor-pointer "
             src={SEARCH_LOGO}
           ></img>
-        </span>
+        </button>
       </div>
       <h3 className="mx-52 my-10 text-xl font-bold">
         Restaurants with online food delivery
@@ -150,7 +152,10 @@ const Body = () => {
         <div className="flex flex-wrap gap-8">
           {filteredRestaurants.map((restaurant) => (
             <Link to={"/restaurantmenu/" + restaurant.info.id}>
-              <RestaurantCard key={restaurant.info.id} resData={restaurant} />
+              <RestaurantCard
+                key={restaurant.info.id}
+                resData={restaurant.info}
+              />
             </Link>
           ))}
         </div>

@@ -23,10 +23,11 @@ const Accordion = (props) => {
             ) : (
               <img className="w-5 h-5=4" src={DOWN_ARROW}></img>
             )}
+            {/* {isActive && props.children} */}
           </div>
         </div>
 
-        {isActive && props.content}
+        {isActive && props.children}
       </div>
     </div>
   );

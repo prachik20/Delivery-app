@@ -8,9 +8,7 @@ import { useState } from "react";
 
 const RestaurantMenu = () => {
   const { id } = useParams();
-
-  const [showIndex, setShowIndex] = useState(0);
-
+  // const [showIndex, setShowIndex] = useState();
   const restMenu = useRestaurantMenu(id);
 
   if (restMenu === null) {
@@ -72,16 +70,17 @@ const RestaurantMenu = () => {
         {categories.map((item, index) => (
           <RestaurantCategory
             data={item?.card?.card}
-            showItems={index === showIndex && true}
-            setShowIndex={() => setShowIndex(index)}
+            // showItems={index === showIndex && true}
+            // setShowIndex={() => setShowIndex(index)}
             restDetails={restMenu?.cards[2].card?.card?.info}
           />
         ))}
         {nestedCategories.map((item, index) => (
           <NestCategory
             nestCat={item?.card?.card}
-            showItems={index === showIndex && true}
-            setShowIndex={() => setShowIndex(index)}
+            // showItems={index === showIndex}
+            // setShowIndex={() => setShowIndex(index)}
+            restDetails={restMenu?.cards[2].card?.card?.info}
           />
         ))}
       </div>

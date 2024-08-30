@@ -25,6 +25,7 @@ const ItemsList = ({ items, restDetails }) => {
 
           return (
             <div
+              data-testid="restMenu"
               key={item.card.info.id}
               className="py-6 mx-2 border-b-2 flex justify-between"
             >

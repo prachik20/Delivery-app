@@ -34,7 +34,7 @@ const Cart = () => {
   return restDetails ? (
     <>
       {" "}
-      <div className="h-screen bg-gray-100 ">
+      <div className="h-screen bg-gray-100 " data-testid="foodItem">
         <div className="text-center text-2xl font-bold p-4">Checkout</div>
         <div className="max-w-[400] h-auto mx-auto bg-white">
           <div className="p-6 shadow-sm flex ">

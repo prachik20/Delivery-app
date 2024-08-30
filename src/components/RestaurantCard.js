@@ -1,10 +1,13 @@
 import { CDN_URL, RATING_STAR } from "../utils/constants";
 
-const RestaurantCard = (props) => {
-  const { name, cuisines, avgRating, sla, cloudinaryImageId } =
-    props.resData?.info;
+const RestaurantCard = ({ resData }) => {
+  const { name, cuisines, avgRating, sla, cloudinaryImageId } = resData;
+
   return (
-    <div className="w-[200] hover:scale-95 origin-center cursor-pointer ease-in-out">
+    <div
+      data-testid="resCards"
+      className="w-[200] hover:scale-95 origin-center cursor-pointer ease-in-out"
+    >
       <div className="w-[200] h-[145]">
         <img
           className="w-full h-full object-cover rounded-lg"

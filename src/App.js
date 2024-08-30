@@ -11,7 +11,6 @@ import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import { Provider } from "react-redux";
 import RestaurantMenu from "./components/RestaurantMenu";
 import appStore from "./utils/appStore";
-import ItemsList from "./components/ItemsList";
 
 const App = () => {
   return (

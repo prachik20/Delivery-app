@@ -1,9 +1,13 @@
+import { useState } from "react";
 import { DOWN_ARROW, UP_ARROW } from "../utils/constants";
+
 import ItemsList from "./ItemsList";
 
-const RestaurantCategory = ({ data, showItems, setShowIndex, restDetails }) => {
+const RestaurantCategory = ({ data, restDetails }) => {
+  const [showItems, setshowItems] = useState(false);
+
   const handleClick = () => {
-    setShowIndex();
+    setshowItems(!showItems);
   };
 
   return (
